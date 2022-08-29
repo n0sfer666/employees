@@ -1,0 +1,15 @@
+.Nav-bar {
+  &__navigate {
+    min-width: 120px;
+  }
+
+  @media screen and (min-width: 0) and (max-width: 576px) {
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100px;
+
+    &__navigate {
+      width: 120px;
+    }
+  }
+}
