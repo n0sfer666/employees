@@ -12,7 +12,9 @@ function TableHead ({ titles }: ITableHeadProps): JSX.Element {
         }
       </tr>
       <tr>
-        <span key='sort'>sort</span>{' '}<span key='filter'>filter</span>
+        <td colSpan={titles.length}>
+          <span key='sort'>sort</span>{' '}<span key='filter'>filter</span>
+        </td>
       </tr>
     </thead>
   )

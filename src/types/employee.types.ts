@@ -2,7 +2,7 @@ export type TRoles = 'cook' | 'driver' | 'waiter'
 export enum ERoles {'cook', 'driver', 'waiter'}
 
 interface IStringKeyObject {
-  [key: string]: unknown
+  [key: string]: number | string | boolean
 }
 
 export interface IEmployee extends IStringKeyObject {
