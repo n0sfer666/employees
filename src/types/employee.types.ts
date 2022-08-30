@@ -13,3 +13,5 @@ export interface IEmployee extends IStringKeyObject {
   phone: string
   birthday: string
 }
+
+export type TEmployeeTitle = keyof IEmployee

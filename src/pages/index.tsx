@@ -1,8 +1,13 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import TableEmployees from '../components/table-employees/table-employees'
 import LayoutMain from '../layout/main'
+import { TRootState } from '../store/store.types'
+import { IEmployee } from '../types/employee.types'
 
 function PageIndex (): JSX.Element {
+  const employees: IEmployee[] = useSelector((state: TRootState) => state.employees.list)
   return (
     <LayoutMain
       header={'Home Page'}
@@ -12,7 +17,7 @@ function PageIndex (): JSX.Element {
         {' '}
         <Link to={'/employee-edit'}>Employee EDIT</Link>
       </nav>
-      <p>content</p>
+      <TableEmployees employees={employees} />
     </LayoutMain>
   )
 }
