@@ -22,4 +22,4 @@ function Checkbox ({ isChecked, label, onChange }: ICheckboxProps): JSX.Element 
   )
 }
 
-export default Checkbox
+export default React.memo(Checkbox)
