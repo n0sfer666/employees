@@ -1,0 +1,7 @@
+table tr.clickable {
+  cursor: pointer;
+
+  &:hover, &:focus, &:active {
+    text-shadow: 0px 0px 8px rgba(213,92,57,0.9);
+  }
+}
