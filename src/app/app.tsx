@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import defaultData from '../../task/employees.json'
 import Router from '../router/router'
@@ -8,13 +8,15 @@ import { TRoles } from '../types/employee.types'
 
 function App (): JSX.Element {
   const dispatch = useDispatch()
-  dispatch(
-    initEmployees(
-      defaultData.map((employee) => {
-        return { ...employee, role: employee.role as TRoles }
-      })
+  useEffect(() => {
+    dispatch(
+      initEmployees(
+        defaultData.map((employee) => {
+          return { ...employee, role: employee.role as TRoles }
+        })
+      )
     )
-  )
+  }, [])
 
   const isInitData = useSelector((state: TRootState) => state.employees.isInit)
 

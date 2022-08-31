@@ -1,10 +1,10 @@
 import React, { ChangeEvent } from 'react'
 import { ITextFieldProps } from './text-field.types'
 
-function TextField ({ label, onChange, placeholder, value }: ITextFieldProps): JSX.Element {
+function TextField ({ label, field, onChange, placeholder, value }: ITextFieldProps): JSX.Element {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     event.stopPropagation()
-    onChange(event.target.value)
+    onChange(field, event.target.value)
   }
   return (
     <div>

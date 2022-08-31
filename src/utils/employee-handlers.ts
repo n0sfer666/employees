@@ -6,9 +6,13 @@ function getDateFromString (stringAsDate: string): Date {
 }
 function getStringFromDate (date: Date): string {
   const year = date.getFullYear().toString()
-  const month = date.getMonth().toString()
-  const day = date.getDay().toString()
+  const month = (date.getMonth() + 1).toString()
+  const day = date.getDate().toString()
   return `${day.length === 1 ? '0' + day : day}.${month.length === 1 ? '0' + month : month}.${year}`
+}
+
+function isDateAsStringCorrect (date: string): boolean {
+  return getStringFromDate(getDateFromString(date)) === date
 }
 
 function isRole (stringToCheck: string): boolean {
@@ -19,4 +23,4 @@ function getNewEmployeeID (employeesData: IEmployee[]): string {
   return (employeesData[employeesData.length - 1].id + 1).toString()
 }
 
-export { getDateFromString, getStringFromDate, isRole, getNewEmployeeID }
+export { isDateAsStringCorrect, isRole, getNewEmployeeID }

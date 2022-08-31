@@ -15,3 +15,4 @@ export interface IEmployee extends IStringKeyObject {
 }
 
 export type TEmployeeTitle = keyof IEmployee
+export type TEmployeeStringTitle = 'name' | 'phone' | 'birthday'

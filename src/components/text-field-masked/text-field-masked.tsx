@@ -12,10 +12,10 @@ const placeholders = {
   birthday: '__.__.____'
 }
 
-function TextFieldMasked ({ label, mask, onChange, value }: ITextFieldMaskedProps): JSX.Element {
+function TextFieldMasked ({ label, field, mask, onChange, value }: ITextFieldMaskedProps): JSX.Element {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     event.stopPropagation()
-    onChange(event.target.value)
+    onChange(field, event.target.value)
   }
   return (
     <div>

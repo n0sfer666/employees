@@ -1,20 +1,23 @@
 import React from 'react'
 import { IAlertProps } from './alert.types'
 
-function Alert ({ text, title, isShow, onClose }: IAlertProps): JSX.Element | null {
+function Alert ({ type, text, title, isShow, onClose }: IAlertProps): JSX.Element | null {
   const handleButtonClick = (): void => { onClose() }
   setTimeout(() => {
     if (isShow) handleButtonClick()
   }, 15000)
   return (
     isShow
-      ? (<div className='alert alert-danger d-flex align-items-center justify-content-between' role='alert'>
-          <div className='d-inline-block'>
-            <span
-              style={{ fontSize: '20px' }}
-            >⚠ </span>
-            <strong>{title}! </strong>
-            <span>{text}</span>
+      ? (<div className={`alert alert-${type} d-flex align-items-center justify-content-between`} role='alert'>
+          <div className='d-flex flex-column'>
+            <p className='m-0'>
+              <strong>
+                {
+                  `${type === 'danger' ? '⚠ ' : ''}${title}`
+                }
+            </strong>
+            </p>
+            <p className='m-0'>{text}</p>
           </div>
           <button type="button" onClick={handleButtonClick} className="btn-close"aria-label="Close"></button>
         </div>)

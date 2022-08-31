@@ -27,5 +27,6 @@ module.exports = {
     'react'
   ],
   rules: {
+    "@typescript-eslint/prefer-includes": "warn"
   }
 }
