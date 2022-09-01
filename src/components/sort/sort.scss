@@ -1,0 +1,9 @@
+.Sort-button {
+  margin: 0 5px;
+  background: transparent;
+  border: none;
+
+  &:hover, &:focus, &:active {
+    text-shadow: 0px 0px 8px hsla(20, 65%, 50%, 0.7);
+  }
+}

@@ -1,8 +1,9 @@
 import React from 'react'
 import { defaultTitles, defaultTitlesRu } from '../../utils/employee-handlers'
+import Sort from '../sort/sort'
 import { ITableHeadProps } from './table-head.types'
 
-function TableHead ({ titles }: ITableHeadProps): JSX.Element {
+function TableHead ({ titles, sortProps }: ITableHeadProps): JSX.Element {
   return (
     <thead>
       <tr>
@@ -15,8 +16,8 @@ function TableHead ({ titles }: ITableHeadProps): JSX.Element {
         }
       </tr>
       <tr className='text-start'>
-        <td colSpan={titles.length} style={{ fontSize: '10px', padding: '0 0 0 8px' }}>
-          <span key='sort'>sort</span>{' '}<span key='filter'>filter</span>
+        <td colSpan={titles.length} style={{ fontSize: '10px', padding: '8px' }}>
+          <Sort {...sortProps} />{' '}<span key='filter'>filter</span>
         </td>
       </tr>
     </thead>

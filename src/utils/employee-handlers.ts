@@ -1,4 +1,5 @@
 import { IAlertProps } from '../components/alert/alert.types'
+import { TSortTypes } from '../store/store.types'
 import { ERoles, IEmployee, TEmployeeStringTitle, TRoles } from '../types/employee.types'
 
 function getDateFromString (stringAsDate: string): Date {
@@ -46,6 +47,8 @@ const defaultStringFields: TEmployeeStringTitle[] = ['name', 'role', 'phone', 'b
 const defaultStringFieldsRu: string[] = ['Имя Фамилия', 'Должность', 'Телефон', 'Дата Рождения']
 const defaultRoles: TRoles[] = ['cook', 'driver', 'waiter']
 const defaultRolesRu: string[] = ['Повар', 'Водитель', 'Официант']
+const sortTypes: TSortTypes[] = ['id', 'name', 'birthday']
+const sortTypesRu: string[] = ['ИД', 'Имя', 'Дата Рождения']
 
 export {
   isDateAsStringCorrect,
@@ -60,5 +63,7 @@ export {
   defaultStringFieldsRu,
   defaultWrongFields,
   initAlertProps,
-  initEmployeeData
+  initEmployeeData,
+  sortTypes,
+  sortTypesRu
 }
