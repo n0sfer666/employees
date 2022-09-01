@@ -8,7 +8,12 @@ function Alert ({ type, text, title, isShow, onClose }: IAlertProps): JSX.Elemen
   }, 15000)
   return (
     isShow
-      ? (<div className={`alert alert-${type} d-flex align-items-center justify-content-between`} role='alert'>
+      ? (<div
+          className={
+            `w-100 alert alert-${type} d-flex align-items-center justify-content-between`
+          }
+          role='alert'
+        >
           <div className='d-flex flex-column'>
             <p className='m-0'>
               <strong>

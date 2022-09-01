@@ -22,7 +22,7 @@ const employeesDataSlice = createSlice({
     },
     addEmployee: (state: IEmployeesDataSliceState, action: PayloadAction<IEmployee>) => {
       if (state.isInit) {
-        state.list.push(action.payload)
+        state.list = [...state.list, action.payload]
         state.newEmployeeID = Number(getNewEmployeeID(state.list))
       }
     },
