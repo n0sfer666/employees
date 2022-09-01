@@ -7,7 +7,7 @@ function Checkbox ({ isChecked, label, onChange }: ICheckboxProps): JSX.Element 
     onChange()
   }
   return (
-    <div className='d-flex align-items-center justify-content-between pt-2 pb-2'>
+    <div className='d-flex align-items-center justify-content-between p-2'>
       <label>
       {label}
       {': '}

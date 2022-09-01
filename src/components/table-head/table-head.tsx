@@ -1,8 +1,6 @@
 import React from 'react'
+import { defaultTitles, defaultTitlesRu } from '../../utils/employee-handlers'
 import { ITableHeadProps } from './table-head.types'
-
-const defaultTitles = ['id', 'name', 'isArchive', 'role', 'phone', 'birthday']
-const defaultTitlesRu = ['ИД', 'Имя Фамилия', 'В архиве?', 'Должность', 'Телефон', 'Дата рождения']
 
 function TableHead ({ titles }: ITableHeadProps): JSX.Element {
   return (

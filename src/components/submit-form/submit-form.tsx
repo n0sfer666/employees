@@ -4,34 +4,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { addEmployee, editEmployee } from '../../store/slices/employees-data'
 import { TRootState } from '../../store/store.types'
-import { IEmployee, TEmployeeStringTitle, TRoles } from '../../types/employee.types'
-import { isDateAsStringCorrect, isRole } from '../../utils/employee-handlers'
+import { TEmployeeStringTitle, TRoles } from '../../types/employee.types'
+import { defaultRoles, defaultRolesRu, defaultStringFields, defaultStringFieldsRu, defaultWrongFields, initAlertProps, initEmployeeData, isDateAsStringCorrect, isRole } from '../../utils/employee-handlers'
 import Alert from '../alert/alert'
-import { IAlertProps } from '../alert/alert.types'
 import Checkbox from '../checkbox/checkbox'
 import TextFieldMasked from '../text-field-masked/text-field-masked'
 import TextField from '../text-field/text-field'
-
-const initAlertProps: IAlertProps = {
-  type: 'danger',
-  isShow: false,
-  onClose: () => {},
-  title: '',
-  text: ''
-}
-const initEmployeeData: IEmployee = {
-  id: -1,
-  name: '',
-  isArchive: false,
-  role: '',
-  phone: '',
-  birthday: ''
-}
-const defaultWrongFields: TEmployeeStringTitle[] = []
-const defaultStringFields: TEmployeeStringTitle[] = ['name', 'role', 'phone', 'birthday']
-const defaultStringFieldsRu: string[] = ['Имя Фамилия', 'Должность', 'Телефон', 'Дата Рождения']
-const defaultRoles: TRoles[] = ['cook', 'driver', 'waiter']
-const defaultRolesRu: string[] = ['Повар', 'Водитель', 'Официант']
 
 function SubmitForm (): JSX.Element {
   const dispatch = useDispatch()
@@ -123,18 +101,28 @@ function SubmitForm (): JSX.Element {
         setAlert({
           ...alert,
           type: 'success',
-          title: 'Сотрудник ' + newEmployeeData.name + (isAdd ? ' добавлен.' : ' отредактирован.'),
+          title: (
+            'Сотрудник ' +
+            newEmployeeData.name +
+            (isAdd ? ' добавлен.' : ' отредактирован.')
+          ),
           text: <Link to={'/'}>Вернуться к списку сотрудников</Link>,
           isShow: true
         })
       } else {
         setWrongFields(wrongs)
-        const wrongFieldsIndexes = wrongs.map((field) => defaultStringFields.indexOf(field))
-        const wrongFieldsRu = wrongFieldsIndexes.map((index) => (defaultStringFieldsRu[index] + ', '))
+        const wrongFieldsIndexes = wrongs.map(
+          (field) => defaultStringFields.indexOf(field)
+        )
+        const wrongFieldsRu = wrongFieldsIndexes.map(
+          (index) => (defaultStringFieldsRu[index] + ', ')
+        )
         setAlert({
           ...alert,
           type: 'danger',
-          title: wrongs.length === 1 ? 'Неправильно заполнена форма:' : 'Неправильно заполнены формы:',
+          title: (wrongs.length === 1
+            ? 'Неправильно заполнена форма:'
+            : 'Неправильно заполнены формы:'),
           text: `${wrongFieldsRu.reduce((prev, next) => prev + next).slice(0, -2)}`,
           isShow: true
         })
@@ -145,10 +133,12 @@ function SubmitForm (): JSX.Element {
     ? <Alert {...alert} />
     : <>
         <Alert {...alert} />
-        <div className={`container m-3 p-3 border rounded ${isAdd ? 'border-warning' : 'border-info'}`}>
-          <div key='id' className='m-2 rounded'>
-            <label className='input-group'>
-              <h4 className='input-group-text'>ID:</h4>
+        <div className={
+          `Submit-form flex-fill m-3 p-3 border rounded ${isAdd ? 'border-warning' : 'border-info'}`
+        }>
+          <div key='id' className='w-100 mb-2 rounded'>
+            <label className='w-100'>
+              <h6 className='input-label'>ID:</h6>
               <input
               className="form-control"
               type="text"
@@ -158,7 +148,12 @@ function SubmitForm (): JSX.Element {
             />
             </label>
           </div>
-          <div key='name' className={`m-2 rounded ${wrongFields.includes('name') ? 'Wrong-field' : ''}`}>
+          <div
+            key='name'
+            className={
+              `w-100 mb-2 rounded ${wrongFields.includes('name') ? 'Wrong-field' : ''}`
+            }
+          >
             <TextField
               field='name'
               label={defaultStringFieldsRu[defaultStringFields.indexOf('name')]}
@@ -167,20 +162,39 @@ function SubmitForm (): JSX.Element {
               value={newEmployeeData.name}
             />
           </div>
-          <div key='role' className='m-2 rounded'>
-            <label className='input-group'>
-              <h4 className='input-group-text'>Должность:</h4>
+          <div key='role' className='w-100 mb-2 rounded'>
+            <label className='w-100'>
+              <h6 className='input-label'>Должность:</h6>
               <select className='form-select' onChange={callback.onChangeRole}>
-                {(isAdd) && (<option value='' selected={newEmployeeData.role === ''}>Выберите профессию...</option>)}
                 {
+                  (isAdd) && (
+                    <option
+                      value=''
+                      selected={newEmployeeData.role === ''}
+                    >
+                      Выберите профессию...
+                    </option>
+                  )
+                } {
                   defaultRoles.map((role, index) => (
-                    <option key={role} value={role} selected={role === employee.role}>{defaultRolesRu[index]}</option>
+                    <option
+                      key={role}
+                      value={role}
+                      selected={ role === employee.role}
+                    >
+                      {defaultRolesRu[index]}
+                    </option>
                   ))
                 }
               </select>
             </label>
           </div>
-          <div key='phone' className={`m-2 rounded ${wrongFields.includes('phone') ? 'Wrong-field' : ''}`}>
+          <div
+            key='phone'
+            className={
+              `w-100 mb-2 rounded ${wrongFields.includes('phone') ? 'Wrong-field' : ''}`
+            }
+          >
             <TextFieldMasked
               field='phone'
               label={defaultStringFieldsRu[defaultStringFields.indexOf('phone')]}
@@ -189,7 +203,12 @@ function SubmitForm (): JSX.Element {
               value={newEmployeeData.phone}
             />
           </div>
-          <div key='birthday' className={`m-2 rounded ${wrongFields.includes('birthday') ? 'Wrong-field' : ''}`}>
+          <div
+            key='birthday'
+            className={
+              `w-100 mb-2 rounded ${wrongFields.includes('birthday') ? 'Wrong-field' : ''}`
+            }
+          >
             <TextFieldMasked
               field='birthday'
               label={defaultStringFieldsRu[defaultStringFields.indexOf('birthday')]}
@@ -198,18 +217,25 @@ function SubmitForm (): JSX.Element {
               value={newEmployeeData.birthday}
             />
           </div>
-          <div key='isArchive' className='m-2 rounded'>
+          <div key='isArchive' className='w-100 mb-2 rounded'>
             <Checkbox
               label='В архиве?'
               isChecked={newEmployeeData.isArchive}
               onChange={callback.onChangeCheckbox}
             />
           </div>
-          <button
-            type='button'
-            className='w-100 mt-3 btn btn-primary'
-            onClick={callback.onSubmit}
-          >{isAdd ? 'Добавить' : 'Редактировать'}</button>
+          <div
+            key='action-button'
+            className='d-flex justify-content-center'
+          >
+            <button
+              type='button'
+              className='w-50 mt-3 btn btn-primary'
+              onClick={callback.onSubmit}
+            >
+              {isAdd ? 'Добавить' : 'Редактировать'}
+            </button>
+          </div>
       </div>
     </>
   )

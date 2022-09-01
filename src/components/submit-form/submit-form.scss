@@ -1,3 +1,6 @@
-.Wrong-field {
-  box-shadow: 0px 0px 6px 3px rgba(209,39,39,0.75);
+.Submit-form {
+  width: 90%!Important;
+  & .Wrong-field {
+    box-shadow: 0px 0px 6px 3px rgba(209,39,39,0.75);
+  }
 }

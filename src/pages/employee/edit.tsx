@@ -4,7 +4,7 @@ import LayoutMain from '../../layout/main'
 
 function PageEmployeeEdit (): JSX.Element {
   return (
-    <LayoutMain header='Редактирование'>
+    <LayoutMain header='Редактирование' isCentred>
       <Outlet />
     </LayoutMain>
   )

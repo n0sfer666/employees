@@ -7,12 +7,10 @@ function TextField ({ label, field, onChange, placeholder, value }: ITextFieldPr
     onChange(field, event.target.value)
   }
   return (
-    <div>
-      <label className='input-group'>
-        <h4 className='input-group-text'>{label}: </h4>
+      <label className='w-100'>
+        <h6 className='input-label'>{label}: </h6>
         <input type='text' className='form-control' placeholder={placeholder} value={value} onChange={handleInputChange} />
     </label>
-    </div>
   )
 }
 

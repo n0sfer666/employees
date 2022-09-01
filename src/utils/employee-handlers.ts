@@ -1,4 +1,5 @@
-import { ERoles, IEmployee } from '../types/employee.types'
+import { IAlertProps } from '../components/alert/alert.types'
+import { ERoles, IEmployee, TEmployeeStringTitle, TRoles } from '../types/employee.types'
 
 function getDateFromString (stringAsDate: string): Date {
   const splitDate = stringAsDate.split('.').map((val) => Number(val))
@@ -23,4 +24,40 @@ function getNewEmployeeID (employeesData: IEmployee[]): string {
   return (employeesData[employeesData.length - 1].id + 1).toString()
 }
 
-export { isDateAsStringCorrect, isRole, getNewEmployeeID }
+const defaultTitles = ['id', 'name', 'isArchive', 'role', 'phone', 'birthday']
+const defaultTitlesRu = ['ИД', 'Имя Фамилия', 'В архиве?', 'Должность', 'Телефон', 'Дата рождения']
+const initAlertProps: IAlertProps = {
+  type: 'danger',
+  isShow: false,
+  onClose: () => {},
+  title: '',
+  text: ''
+}
+const initEmployeeData: IEmployee = {
+  id: -1,
+  name: '',
+  isArchive: false,
+  role: '',
+  phone: '',
+  birthday: ''
+}
+const defaultWrongFields: TEmployeeStringTitle[] = []
+const defaultStringFields: TEmployeeStringTitle[] = ['name', 'role', 'phone', 'birthday']
+const defaultStringFieldsRu: string[] = ['Имя Фамилия', 'Должность', 'Телефон', 'Дата Рождения']
+const defaultRoles: TRoles[] = ['cook', 'driver', 'waiter']
+const defaultRolesRu: string[] = ['Повар', 'Водитель', 'Официант']
+
+export {
+  isDateAsStringCorrect,
+  isRole,
+  getNewEmployeeID,
+  defaultTitles,
+  defaultTitlesRu,
+  defaultRoles,
+  defaultRolesRu,
+  defaultStringFields,
+  defaultStringFieldsRu,
+  defaultWrongFields,
+  initAlertProps,
+  initEmployeeData
+}

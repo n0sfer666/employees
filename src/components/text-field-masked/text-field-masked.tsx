@@ -18,18 +18,16 @@ function TextFieldMasked ({ label, field, mask, onChange, value }: ITextFieldMas
     onChange(field, event.target.value)
   }
   return (
-    <div>
-      <label className='input-group'>
-        <h4 className='input-group-text'>{label}: </h4>
-        <InputMask
-          mask={masks[mask]}
-          placeholder={placeholders[mask]}
-          value={value}
-          onChange={handleInputChange}
-          className='form-control'
-        />
-    </label>
-    </div>
+    <label className='w-100'>
+      <h6 className='input-label'>{label}: </h6>
+      <InputMask
+        mask={masks[mask]}
+        placeholder={placeholders[mask]}
+        value={value}
+        onChange={handleInputChange}
+        className='form-control'
+      />
+  </label>
   )
 }
 

@@ -4,7 +4,7 @@ import LayoutMain from '../../layout/main'
 
 function PageEmployeeAdd (): JSX.Element {
   return (
-    <LayoutMain header='Добавление сотрудника'>
+    <LayoutMain header='Добавление сотрудника' isCentred>
       <SubmitForm />
     </LayoutMain>
   )
