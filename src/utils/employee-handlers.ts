@@ -51,6 +51,7 @@ export {
   isDateAsStringCorrect,
   isRole,
   getNewEmployeeID,
+  getDateFromString,
   defaultTitles,
   defaultTitlesRu,
   defaultRoles,
