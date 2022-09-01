@@ -25,7 +25,11 @@ function TableEmployees ({ employees }: ITableEmployeesProps): JSX.Element {
                 Object.keys(employee).map((key) => (
                   key === 'id'
                     ? <th scope='row' key={key}>{employee[key]}</th>
-                    : <td key={key}>{employee[key].toString()}</td>
+                    : <td key={key} className={key === 'name' ? 'text-start' : ''}>{
+                      (typeof (employee[key]) === 'boolean' && employee[key] === true)
+                        ? '✔'
+                        : employee[key]
+                    }</td>
                 ))
               }
             </tr>

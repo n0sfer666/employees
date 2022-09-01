@@ -1,4 +1,4 @@
-export type TRoles = 'cook' | 'driver' | 'waiter'
+export type TRoles = 'cook' | 'driver' | 'waiter' | ''
 export enum ERoles {'cook', 'driver', 'waiter'}
 
 interface IStringKeyObject {
@@ -15,4 +15,4 @@ export interface IEmployee extends IStringKeyObject {
 }
 
 export type TEmployeeTitle = keyof IEmployee
-export type TEmployeeStringTitle = 'name' | 'phone' | 'birthday'
+export type TEmployeeStringTitle = 'name' | 'role' | 'phone' | 'birthday'

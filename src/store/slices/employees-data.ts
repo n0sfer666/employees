@@ -21,7 +21,7 @@ const employeesDataSlice = createSlice({
       state.newEmployeeID = Number(getNewEmployeeID(state.list))
     },
     addEmployee: (state: IEmployeesDataSliceState, action: PayloadAction<IEmployee>) => {
-      if (state.isInit && action.payload.id === state.newEmployeeID) {
+      if (state.isInit) {
         state.list.push(action.payload)
         state.newEmployeeID = Number(getNewEmployeeID(state.list))
       }

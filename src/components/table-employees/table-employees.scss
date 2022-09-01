@@ -1,7 +1,10 @@
-table tr.clickable {
-  cursor: pointer;
-
-  &:hover, &:focus, &:active {
-    text-shadow: 0px 0px 8px rgba(213,92,57,0.9);
+table {
+  text-align: center;
+  & tr.clickable {
+    cursor: pointer;
+  
+    &:hover, &:focus, &:active {
+      text-shadow: 0px 0px 8px hsla(230, 65%, 50%, 0.7);
+    }
   }
 }

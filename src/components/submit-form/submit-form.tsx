@@ -19,17 +19,17 @@ const initAlertProps: IAlertProps = {
   title: '',
   text: ''
 }
-const initEmployeeData: IEmployee[] = [{
+const initEmployeeData: IEmployee = {
   id: -1,
   name: '',
   isArchive: false,
-  role: 'cook',
+  role: '',
   phone: '',
   birthday: ''
-}]
+}
 const defaultWrongFields: TEmployeeStringTitle[] = []
-const defaultStringFields: TEmployeeStringTitle[] = ['name', 'phone', 'birthday']
-const defaultStringFieldsRu: string[] = ['Имя и Фамилия', 'Телефон', 'День Рождения']
+const defaultStringFields: TEmployeeStringTitle[] = ['name', 'role', 'phone', 'birthday']
+const defaultStringFieldsRu: string[] = ['Имя Фамилия', 'Должность', 'Телефон', 'Дата Рождения']
 const defaultRoles: TRoles[] = ['cook', 'driver', 'waiter']
 const defaultRolesRu: string[] = ['Повар', 'Водитель', 'Официант']
 
@@ -44,7 +44,7 @@ function SubmitForm (): JSX.Element {
     ...initAlertProps,
     onClose: () => { setAlert({ ...alert, isShow: false }) }
   })
-  const [newEmployeeData, setNewEmployeeData] = useState(initEmployeeData[0])
+  const [newEmployeeData, setNewEmployeeData] = useState(initEmployeeData)
   const [wrongFields, setWrongFields] = useState(defaultWrongFields)
 
   const newEmployeeId = useSelector((state: TRootState) => state.employees.newEmployeeID)
@@ -52,7 +52,7 @@ function SubmitForm (): JSX.Element {
     (employee) => employee.id === Number(id)
   ))
   const isError = !isAdd && editedEmployee.length === 0
-  const [employee] = isAdd ? initEmployeeData : editedEmployee
+  const [employee] = isAdd ? [initEmployeeData] : editedEmployee
   useEffect(() => {
     if (isError) {
       setAlert({
@@ -76,6 +76,10 @@ function SubmitForm (): JSX.Element {
     }
   }, [editedEmployee.length])
 
+  useEffect(() => {
+    if (newEmployeeData.id !== -1) setNewEmployeeData({ ...initEmployeeData, id: newEmployeeId })
+  }, [newEmployeeId])
+
   const callback = {
     onChangeTextField: useCallback((field: TEmployeeStringTitle, value: string) => {
       setNewEmployeeData({ ...newEmployeeData, [field]: value })
@@ -91,7 +95,7 @@ function SubmitForm (): JSX.Element {
       setNewEmployeeData({ ...newEmployeeData, isArchive: !newEmployeeData.isArchive })
     }, [newEmployeeData]),
     onSubmit: () => {
-      const { name, phone, birthday } = newEmployeeData
+      const { name, phone, birthday, role } = newEmployeeData
       setWrongFields(defaultWrongFields)
       setAlert({ ...alert, text: '' })
       const wrongs: TEmployeeStringTitle[] = []
@@ -101,6 +105,7 @@ function SubmitForm (): JSX.Element {
       if (!isNameCorrect) wrongs.push('name')
       if (!isPhoneCorrect) wrongs.push('phone')
       if (!isBirthdayCorrect) wrongs.push('birthday')
+      if (!isRole(role)) wrongs.push('role')
       if (!isAdd && _.isEqual(newEmployeeData, employee)) {
         setAlert({
           ...alert,
@@ -118,7 +123,7 @@ function SubmitForm (): JSX.Element {
         setAlert({
           ...alert,
           type: 'success',
-          title: 'Сотрудник ' + (isAdd ? 'добавлен.' : 'отредактирован.'),
+          title: 'Сотрудник ' + newEmployeeData.name + (isAdd ? ' добавлен.' : ' отредактирован.'),
           text: <Link to={'/'}>Вернуться к списку сотрудников</Link>,
           isShow: true
         })
@@ -126,11 +131,10 @@ function SubmitForm (): JSX.Element {
         setWrongFields(wrongs)
         const wrongFieldsIndexes = wrongs.map((field) => defaultStringFields.indexOf(field))
         const wrongFieldsRu = wrongFieldsIndexes.map((index) => (defaultStringFieldsRu[index] + ', '))
-        console.log(wrongFieldsRu.reduce((prev, next) => prev + next))
         setAlert({
           ...alert,
           type: 'danger',
-          title: 'Неправильно заполнена(ы) форма(ы):',
+          title: wrongs.length === 1 ? 'Неправильно заполнена форма:' : 'Неправильно заполнены формы:',
           text: `${wrongFieldsRu.reduce((prev, next) => prev + next).slice(0, -2)}`,
           isShow: true
         })
@@ -167,7 +171,7 @@ function SubmitForm (): JSX.Element {
             <label className='input-group'>
               <h4 className='input-group-text'>Должность:</h4>
               <select className='form-select' onChange={callback.onChangeRole}>
-                {(isAdd) && (<option value='' selected>Выберите профессию...</option>)}
+                {(isAdd) && (<option value='' selected={newEmployeeData.role === ''}>Выберите профессию...</option>)}
                 {
                   defaultRoles.map((role, index) => (
                     <option key={role} value={role} selected={role === employee.role}>{defaultRolesRu[index]}</option>
