@@ -40,9 +40,10 @@ const employeesDataSlice = createSlice({
       }
     },
     sortEmployeeBy: (state: IEmployeesSliceState, action: TSortPayload) => {
+      const { type, isReverse } = action.payload
       state.list = state.list.sort(
         function (a, b) {
-          switch (action.payload) {
+          switch (type) {
             case 'name': {
               return a.name.localeCompare(b.name)
             }
@@ -58,6 +59,9 @@ const employeesDataSlice = createSlice({
           }
         }
       )
+      if (isReverse !== undefined && isReverse) {
+        state.list = state.list.reverse()
+      }
     }
   }
 })

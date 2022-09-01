@@ -11,6 +11,10 @@ export interface IEmployeesSliceState {
 }
 
 export type TSortTypes = 'id' | 'name' | 'birthday'
+export interface TSortAction {
+  type: TSortTypes
+  isReverse?: boolean
+}
 export type TInitPayload = PayloadAction<IEmployee[]>
 export type TEditPayload = PayloadAction<IEmployee>
-export type TSortPayload = PayloadAction<TSortTypes>
+export type TSortPayload = PayloadAction<TSortAction>
