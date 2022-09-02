@@ -3,7 +3,8 @@ import { TRoles } from '../../types/employee.types'
 import { defaultRoles, defaultRolesRu } from '../../utils/employee-handlers'
 import { IFilterProps } from './filter.types'
 
-function Filter ({ filterState, onFilter }: IFilterProps): JSX.Element {
+function Filter ({ filterState, onFilter, isMobileView }: IFilterProps): JSX.Element {
+  const isMobileLayout = isMobileView === undefined || isMobileView
   const [isFilter, setIsFilter] = useState(false)
   const [roleIsDefault, setRoleIsDefault] = useState(true)
   const handleButtonCloseClick = (): void => {
@@ -32,11 +33,11 @@ function Filter ({ filterState, onFilter }: IFilterProps): JSX.Element {
       >
         Фильтр
       </button>
-      : <div className='p-1'>
+      : <div className={`d-flex align-items-center justify-content-end p-1${!isMobileLayout ? ' m-1' : ' w-50'}`}>
           Должность
           {': '}
           <select
-            className='form-select cursor-pointer h-100 w-25 d-inline-block p-0 ps-3'
+            className='form-select cursor-pointer flex-grow-1 h-100 w-25 d-inline-block ms-1 me-1 p-0 ps-3 pe-3'
             onChange={handleSelectChange}
           >
             {(roleIsDefault) && (<option key='default'>...</option>)}
@@ -45,7 +46,7 @@ function Filter ({ filterState, onFilter }: IFilterProps): JSX.Element {
             ))}
           </select>
           {' '}
-          <label className={`cursor-pointer${
+          <label className={`cursor-pointer ms-1 me-1${
             filterState.isArchive === undefined ? ' opacity-25' : ''
           }`}>
             В архиве
@@ -62,7 +63,7 @@ function Filter ({ filterState, onFilter }: IFilterProps): JSX.Element {
           </label>
           {'    '}
           <button
-            className='Filter__button-close'
+            className='Filter__button-close ms-1 me-1'
             onClick={handleButtonCloseClick}
           >✖</button>
       </div>

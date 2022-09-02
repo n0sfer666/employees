@@ -44,7 +44,8 @@ function PageIndex (): JSX.Element {
   }, [])
   useEffect(() => {
     dispatch(sortEmployeeBy({ ...sort[0][sortKey] }))
-  }, [sort, sortKey])
+    setFilter({ ...filter })
+  }, [sort, sortKey, filter])
   useEffect(() => {
     let tmpEmployees = [...employees]
     const filterKeys = Object.getOwnPropertyNames(filter)
@@ -59,7 +60,7 @@ function PageIndex (): JSX.Element {
       }
       setFilteredEmployees(tmpEmployees)
     }
-  }, [filter, filter.role, filter.isArchive])
+  }, [filter, sort])
 
   const callbacks = {
     onSort: useCallback((key: TSortTypes, action: TSortAction) => {
@@ -83,15 +84,23 @@ function PageIndex (): JSX.Element {
         windowsWidth >= maxWidthForTable
           ? <div className='container'>
               <TableEmployees
-                employees={employees}
+                employees={isFiltered ? filteredEmployees : employees}
                 sortProps={{
                   onSort: callbacks.onSort,
                   sortState: sort
+                }}
+                filterProps={{
+                  onFilter: callbacks.onFilter,
+                  filterState: filter
                 }} />
             </div>
           : <div>
               <Sort onSort={callbacks.onSort} sortState={sort} />
-              <Filter onFilter={callbacks.onFilter} filterState={filter} />
+              <Filter
+                onFilter={callbacks.onFilter}
+                filterState={filter}
+                isMobileView={windowsWidth >= maxWidthForTable}
+              />
               <div className={
               windowsWidth >= maxWidthForTwoColumn
                 ? mobContainerClasses

@@ -1,9 +1,10 @@
 import React from 'react'
 import { defaultTitles, defaultTitlesRu } from '../../utils/employee-handlers'
+import Filter from '../filter/filter'
 import Sort from '../sort/sort'
 import { ITableHeadProps } from './table-head.types'
 
-function TableHead ({ titles, sortProps }: ITableHeadProps): JSX.Element {
+function TableHead ({ titles, sortProps, filterProps }: ITableHeadProps): JSX.Element {
   return (
     <thead>
       <tr>
@@ -16,8 +17,13 @@ function TableHead ({ titles, sortProps }: ITableHeadProps): JSX.Element {
         }
       </tr>
       <tr className='text-start'>
-        <td colSpan={titles.length} style={{ fontSize: '10px', padding: '8px' }}>
-          <Sort {...sortProps} />{' '}<span key='filter'>filter</span>
+        <td
+          colSpan={titles.length}
+          style={{ fontSize: '10px', padding: '8px' }}>
+          <div className='d-flex justify-content-between align-items-center'>
+            <Sort {...sortProps} />
+            <Filter {...filterProps} />
+          </div>
         </td>
       </tr>
     </thead>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import TableHead from '../table-head/table-head'
 import { ITableEmployeesProps } from './table-employees.types'
 
-function TableEmployees ({ employees, sortProps }: ITableEmployeesProps): JSX.Element {
+function TableEmployees ({ employees, sortProps, filterProps }: ITableEmployeesProps): JSX.Element {
   const navigate = useNavigate()
   const handleTrClick = (event: MouseEvent<HTMLTableRowElement>): void => {
     event.stopPropagation()
@@ -11,7 +11,10 @@ function TableEmployees ({ employees, sortProps }: ITableEmployeesProps): JSX.El
   }
   return (
     <table className='table table-striped table-borderless table-info'>
-      <TableHead titles={Object.keys(employees[0])} sortProps={sortProps} />
+      <TableHead
+      titles={Object.keys(employees[0])}
+      sortProps={sortProps}
+      filterProps={filterProps} />
       <tbody>
         {
           employees.map((employee) => (
