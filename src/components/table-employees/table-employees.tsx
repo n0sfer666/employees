@@ -1,5 +1,6 @@
 import React, { MouseEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { defaultRoles, defaultRolesRu } from '../../utils/employee-handlers'
 import TableHead from '../table-head/table-head'
 import { ITableEmployeesProps } from './table-employees.types'
 
@@ -31,7 +32,9 @@ function TableEmployees ({ employees, sortProps, filterProps }: ITableEmployeesP
                     : <td key={key} className={key === 'name' ? 'text-start' : ''}>{
                       (typeof (employee[key]) === 'boolean' && employee[key] === true)
                         ? '✔'
-                        : employee[key]
+                        : key === 'role'
+                          ? defaultRolesRu[defaultRoles.indexOf(employee[key])]
+                          : employee[key]
                     }</td>
                 ))
               }

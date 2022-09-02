@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { defaultRoles, defaultRolesRu, defaultTitles, defaultTitlesRu } from '../../utils/employee-handlers'
 import { ICardProps } from './card.types'
 
 function Card (props: ICardProps): JSX.Element {
@@ -18,11 +19,13 @@ function Card (props: ICardProps): JSX.Element {
           <p key={key} className={
             `m-0 p-0 ${index % 2 === 0 ? 'bg-warning' : ''}`
           }>
-            <strong className='float-start'>{key}: </strong>
+            <strong className='float-start'>{defaultTitlesRu[defaultTitles.indexOf(key)]}: </strong>
             <span className='float-end'>{
               (typeof (props[key]) === 'boolean' && props[key] === true)
                 ? '✔'
-                : props[key]
+                : key === 'role'
+                  ? defaultRolesRu[defaultRoles.indexOf(props[key])]
+                  : props[key]
             }</span>
           </p>
         ))
