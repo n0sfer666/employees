@@ -6,7 +6,6 @@ import { initEmployees } from '../store/slices/employees-data'
 import { setLocation } from '../store/slices/locations-data'
 import { TRootState } from '../store/store.types'
 import { TRoles } from '../types/employee.types'
-import { defaultHomeLocations } from '../utils/employee-handlers'
 
 const initData = defaultData.map((employee) => {
   return { ...employee, role: employee.role as TRoles }
@@ -14,12 +13,13 @@ const initData = defaultData.map((employee) => {
 
 function App (): JSX.Element {
   const dispatch = useDispatch()
+  const homeLocation = useSelector((state: TRootState) => state.locations.home)
   useEffect(() => {
     dispatch(initEmployees(initData))
-
-    const currentHomeLocation = window.location.pathname
-    if (currentHomeLocation !== defaultHomeLocations.home) {
-      dispatch(setLocation({ type: 'home', value: currentHomeLocation }))
+    const homePath = window.location.pathname
+    if (homePath !== homeLocation) {
+      dispatch(setLocation({ type: 'home', value: homePath.slice(1) }))
+      console.warn("Home location wasn't '/' and changed to ", homePath.slice(1))
     }
   }, [])
 
