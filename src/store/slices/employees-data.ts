@@ -14,7 +14,7 @@ const initialState: IEmployeesSliceState = {
 }
 
 const employeesDataSlice = createSlice({
-  name: 'data',
+  name: 'employee',
   initialState,
   reducers: {
     initEmployees: (state: IEmployeesSliceState, action: TInitPayload) => {

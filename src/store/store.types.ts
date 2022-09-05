@@ -18,3 +18,14 @@ export interface TSortAction {
 export type TInitPayload = PayloadAction<IEmployee[]>
 export type TEditPayload = PayloadAction<IEmployee>
 export type TSortPayload = PayloadAction<TSortAction>
+
+export interface ILocationsSliceState {
+  home: string
+  add: string
+  edit: string
+}
+interface ISetLocationAction {
+  type: keyof ILocationsSliceState
+  value: string
+}
+export type TSetLocationPayload = PayloadAction<ISetLocationAction>
