@@ -12,12 +12,12 @@ import TextFieldMasked from '../text-field-masked/text-field-masked'
 import TextField from '../text-field/text-field'
 
 function SubmitForm (): JSX.Element {
+  const locations = useSelector((state: TRootState) => state.locations)
   const dispatch = useDispatch()
   const { id } = useParams()
   const { pathname } = useLocation()
   const navigate = useNavigate()
-  const isAdd = pathname === '/employee-add'
-
+  const isAdd = pathname.slice(1) === locations.add
   const [alert, setAlert] = useState({
     ...initAlertProps,
     onClose: () => { setAlert({ ...alert, isShow: false }) }
@@ -40,11 +40,11 @@ function SubmitForm (): JSX.Element {
         text: 'Через 10 сек, вы будете перенаправлены... или нажмите =>',
         onClose: () => {
           setAlert({ ...alert, isShow: false })
-          navigate('/')
+          navigate(locations.home)
         }
       })
       setTimeout(() => {
-        navigate('/')
+        navigate(locations.home)
       }, 10000)
       console.error('Wrong ID in location pathname')
     } else if (!isAdd) {
@@ -106,7 +106,7 @@ function SubmitForm (): JSX.Element {
             newEmployeeData.name +
             (isAdd ? ' добавлен.' : ' отредактирован.')
           ),
-          text: <Link to={'/'}>Вернуться к списку сотрудников</Link>,
+          text: <Link to={locations.home}>Вернуться к списку сотрудников</Link>,
           isShow: true
         })
       } else {
