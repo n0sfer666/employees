@@ -31,7 +31,8 @@ function PageIndex (): JSX.Element {
   )
   const [windowsWidth, setWindowWidth] = useState(getWindowWidth())
   const [sort, setSort] = useState(initSortState)
-  const [sortKey, setSortKey] = useState(Object.getOwnPropertyNames(initSortState[0])[0]
+  const [sortKey, setSortKey] = useState(
+    Object.getOwnPropertyNames(initSortState[0])[0]
   )
   const [filter, setFilter] = useState(initFilterState)
   const [isFiltered, setIsFiltered] = useState(false)
@@ -72,8 +73,7 @@ function PageIndex (): JSX.Element {
         key === undefined && value === undefined
           ? setFilter(initFilterState)
           : setFilter({ ...filter, [key as string]: value })
-      },
-      [filter])
+      }, [filter])
   }
 
   return (
