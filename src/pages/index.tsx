@@ -44,8 +44,8 @@ function PageIndex (): JSX.Element {
     window.addEventListener('resize', handleWindowResize)
   }, [])
   useEffect(() => {
-    dispatch(sortEmployeeBy({ ...sort[0][sortKey] }))
-    setFilter({ ...filter })
+    dispatch(sortEmployeeBy(sort[0][sortKey]))
+    setFilter(filter)
   }, [sort, sortKey, filter])
   useEffect(() => {
     let tmpEmployees = [...employees]
