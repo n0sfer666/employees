@@ -42,6 +42,13 @@ const initEmployeeData: IEmployee = {
   phone: '',
   birthday: ''
 }
+
+const defaultHomeLocations = {
+  home: '/',
+  add: 'employee-add',
+  edit: 'employee-edit'
+}
+
 const defaultWrongFields: TEmployeeStringTitle[] = []
 const defaultStringFields: TEmployeeStringTitle[] = ['name', 'role', 'phone', 'birthday']
 const defaultStringFieldsRu: string[] = ['Имя Фамилия', 'Должность', 'Телефон', 'Дата Рождения']
@@ -55,6 +62,7 @@ export {
   isRole,
   getNewEmployeeID,
   getDateFromString,
+  defaultHomeLocations,
   defaultTitles,
   defaultTitlesRu,
   defaultRoles,

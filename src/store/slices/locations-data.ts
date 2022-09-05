@@ -1,11 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { defaultHomeLocations } from '../../utils/employee-handlers'
 import { ILocationsSliceState, TSetLocationPayload } from '../store.types'
 
-const initialState: ILocationsSliceState = {
-  home: '/',
-  add: 'employee-add',
-  edit: 'employee-edit'
-}
+const initialState: ILocationsSliceState = { ...defaultHomeLocations }
 
 const locationsDataSlice = createSlice({
   name: 'location',
