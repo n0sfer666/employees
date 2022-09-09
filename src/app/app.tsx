@@ -18,8 +18,8 @@ function App (): JSX.Element {
     dispatch(initEmployees(initData))
     const homePath = window.location.pathname
     if (homePath !== homeLocation) {
-      dispatch(setLocation({ type: 'home', value: homePath.slice(1) }))
-      console.warn("Home location wasn't '/' and changed to ", homePath.slice(1))
+      dispatch(setLocation({ type: 'home', value: homePath.replace(/\//, '') }))
+      console.warn("Home location wasn't '/' and changed to ", homePath.replace(/\//, ''))
     }
   }, [])
 
