@@ -43,7 +43,7 @@ const initEmployeeData: IEmployee = {
   birthday: ''
 }
 
-const defaultHomeLocations = {
+const defaultLocations = {
   home: '/',
   add: 'employee-add',
   edit: 'employee-edit'
@@ -62,7 +62,7 @@ export {
   isRole,
   getNewEmployeeID,
   getDateFromString,
-  defaultHomeLocations,
+  defaultLocations,
   defaultTitles,
   defaultTitlesRu,
   defaultRoles,
