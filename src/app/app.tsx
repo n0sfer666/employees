@@ -18,9 +18,9 @@ function App (): JSX.Element {
     dispatch(initEmployees(initData))
     if (isDeploy) {
       const payload: ISetLocationAction[] = [
-        { type: 'home', value: '/employee/' },
-        { type: 'add', value: '/employee/employee-add' },
-        { type: 'edit', value: '/employee/employee-edit' }
+        { type: 'home', value: '/employees/' },
+        { type: 'add', value: '/employees/employee-add' },
+        { type: 'edit', value: '/employees/employee-edit' }
       ]
       dispatch((setLocation(payload)))
     }
