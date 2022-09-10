@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import defaultData from '../../task/employees.json'
 import Router from '../router/router'
 import { initEmployees } from '../store/slices/employees-data'
 import { setLocation } from '../store/slices/locations-data'
-import { TRootState } from '../store/store.types'
+import { ISetLocationAction, TRootState } from '../store/store.types'
 import { TRoles } from '../types/employee.types'
 
 const initData = defaultData.map((employee) => {
@@ -12,14 +12,17 @@ const initData = defaultData.map((employee) => {
 })
 
 function App (): JSX.Element {
+  const isDeploy = useMemo(() => window.location.hostname.toLowerCase() !== 'localhost', [])
   const dispatch = useDispatch()
-  const homeLocation = useSelector((state: TRootState) => state.locations.home)
   useEffect(() => {
     dispatch(initEmployees(initData))
-    const homePath = window.location.pathname
-    if (homePath !== homeLocation) {
-      dispatch(setLocation({ type: 'home', value: homePath.replace(/\//, '') }))
-      console.warn("Home location wasn't '/' and changed to ", homePath.replace(/\//, ''))
+    if (isDeploy) {
+      const payload: ISetLocationAction[] = [
+        { type: 'home', value: '/employee/' },
+        { type: 'add', value: '/employee/employee-add' },
+        { type: 'edit', value: '/employee/employee-edit' }
+      ]
+      dispatch((setLocation(payload)))
     }
   }, [])
 

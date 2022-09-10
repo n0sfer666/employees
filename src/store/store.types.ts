@@ -24,8 +24,8 @@ export interface ILocationsSliceState {
   add: string
   edit: string
 }
-interface ISetLocationAction {
+export interface ISetLocationAction {
   type: keyof ILocationsSliceState
   value: string
 }
-export type TSetLocationPayload = PayloadAction<ISetLocationAction>
+export type TSetLocationPayload = PayloadAction<ISetLocationAction | ISetLocationAction[]>

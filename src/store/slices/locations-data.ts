@@ -9,8 +9,15 @@ const locationsDataSlice = createSlice({
   initialState,
   reducers: {
     setLocation: (state: ILocationsSliceState, action: TSetLocationPayload) => {
-      const { type, value } = action.payload
-      state = { ...state, [type]: value }
+      if (Array.isArray(action.payload)) {
+        action.payload.forEach((payload) => {
+          const { type, value } = payload
+          state = { ...state, [type]: value }
+        })
+      } else {
+        const { type, value } = action.payload
+        state = { ...state, [type]: value }
+      }
     }
   }
 })
